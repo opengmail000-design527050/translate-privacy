@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Translate 隐私权政策</title>
+<title>Gloss 隐私权政策</title>
 <style>
   :root { color-scheme: light dark; --bg: #ffffff; --fg: #141414; --muted: #6e6e6e; --line: rgba(0, 0, 0, .1); --accent: #b4637a; }
   @media (prefers-color-scheme: dark) { :root { --bg: #0d0d0d; --fg: #ececec; --muted: #8c8c8c; --line: rgba(255, 255, 255, .1); --accent: #ebbcba; } }
@@ -23,45 +23,55 @@
 </head>
 <body>
 <main>
-<h1>Translate 隐私权政策</h1>
-<p class="meta">适用于 Chrome 扩展 Translate（网页、YouTube 字幕和直播的双语翻译）· 生效日期：2026 年 10 月 19 日</p>
+<h1>Gloss 隐私权政策</h1>
+<p class="meta">适用于 Chrome 扩展 Gloss（网页、YouTube / B 站字幕和直播的双语翻译）· 生效日期：2026 年 10 月 30 日</p>
 
 <h2>一句话</h2>
-<p>这个扩展没有自己的服务器，不收集、不出售任何数据，也没有统计和广告。你要翻译的内容只会发给<strong>你自己在设置页填的接口</strong>
-（比如 OpenAI、Anthropic，或者你自建的服务），用来翻译或识别语音；其余东西都只存在你这台电脑的浏览器里。</p>
+<p>扩展的开发者没有接收数据的服务器，收不到你的 API Key、网页内容、字幕或音频，也没有统计和广告。为了翻译和识别语音，扩展会把你要翻译的内容发给<strong>你自己在设置页填的接口</strong>
+（比如 OpenAI、Anthropic、DeepSeek，或者你自建的服务）；读字幕和视频片段时会访问对应的视频网站和它们的视频服务器。设置、缓存和用量记录都存在你这台电脑的浏览器里。</p>
 
 <h2>会发出去的东西，发给谁</h2>
-<p>以下内容只在你打开相应的翻译时，发给你配置的接口地址（扩展的开发者收不到）：</p>
+<p>以下内容在你打开相应的翻译时（包括设成「总是翻译」的网站和默认自动开启的字幕翻译），或者在设置页点「测试连接」时（发一句固定的示例文字 / 一小段测试音），发给你配置的接口地址（扩展的开发者收不到）：</p>
 <ul>
-  <li><strong>网页翻译</strong>：页面上要翻译的段落文字（默认只翻出现在屏幕上的段落），以及页面标题（帮助模型判断领域）。
+  <li><strong>网页翻译</strong>：页面上要翻译的文字（整页都翻，导航、按钮也算；默认只翻进入屏幕的部分），以及页面标题（帮助模型判断领域）。
     只有你在弹窗里打开翻译、按快捷键，或者把这个网站设成「总是翻译」时才会发生。</li>
-  <li><strong>YouTube 字幕</strong>：视频的字幕文字，以及视频标题、简介里的一段（帮助统一人名和术语）。</li>
+  <li><strong>YouTube 和 B 站字幕</strong>：视频的字幕文字，以及视频标题、简介里的一段（帮助统一人名和术语）；你写了指定译法的话，还有这批字幕里出现了的那几条。</li>
   <li><strong>直播和回放字幕</strong>：视频里有字幕时，发字幕文字。没有字幕、或者你在弹窗里点了「改用语音识别」时，
-    录下这个标签页的声音发给你配置的语音识别接口，再把识别出的文字发给翻译接口；录音需要你在弹窗里另外授权。</li>
-  <li><strong>回放字幕中断时补识别</strong>：Twitch / Kick 回放用的是视频里主播自己的字幕；主播的字幕软件中途停掉、
-    而那一段有人声时，扩展会从视频数据里取出那一段的声音（不是录标签页），发给你配置的语音识别接口补上。
+    录下这个标签页的声音发给你配置的语音识别接口，再把识别出的文字发给翻译接口；录音需要你在弹窗里另外授权。翻译请求还会携带页面标题、平台分类、少量近期原文和命中的指定译法，帮助模型理解语境并统一术语。
+    语音识别请求也可能带上少量近期原文、视频标题和专名拼写，帮助识别。OpenAI 官方语音识别的实时方式（实验功能，默认关闭）会先向 OpenAI 申请一个短期凭据，再用它连上同一服务。</li>
+  <li><strong>回放字幕中断时补识别</strong>：Twitch / Kick 回放用的是视频里主播自己的字幕；字幕中间空了一段（几秒以上没有字幕）、
+    而那一段有声音时，扩展会从视频数据里取出那一段的声音（不是录标签页），发给你配置的语音识别接口补上。
     只有你配置了语音识别接口才会这样做。</li>
   <li><strong>你的 API Key</strong>：只作为请求头，发给你为它填写的那个接口地址。</li>
 </ul>
 <p>这些接口由你选择，它们怎样处理收到的内容，以各自的隐私权政策为准。</p>
 
-<h2>读取视频里的字幕</h2>
+<h2>从视频网站读取字幕</h2>
+<p>下面这些请求发给视频网站自己，可能带着你在那个网站的登录状态；网站的 Cookie 不会发给翻译或语音识别接口。</p>
 <ul>
   <li><strong>Twitch 回放</strong>：你授权 <code>www.twitch.tv</code> 之后，扩展在 Twitch 页面里读取播放器本来就在下载的视频数据，
     从中取出主播嵌在视频里的字幕。不另外下载，不调用 Twitch 的接口；读到的数据只留在页面里，你打开直播翻译时才拿来翻译。</li>
   <li><strong>Kick 回放</strong>：你打开直播翻译时，扩展从 Kick 的视频服务器下载播放位置附近最低清晰度的几小段视频，读里面的字幕
-    （字幕中断时也取其中那一段的声音补识别，见上），请求不带 cookie。</li>
+    （字幕中断时也取其中那一段的声音补识别，见上），这些请求不带 Cookie。页面里找不到播放地址时，会向 Kick 网站自己的视频信息接口查一次，这次请求会带着你在 Kick 的登录状态。</li>
   <li><strong>YouTube</strong>：字幕从 YouTube 自己的字幕接口读取，跟播放器显示字幕时取的是同一份。</li>
+  <li><strong>B 站</strong>：字幕列表从 B 站自己的接口读取（跟播放器取的是同一份，带着你在 B 站的登录状态），字幕文件从 B 站的字幕服务器读取。</li>
 </ul>
 
 <h2>只存在你电脑上的东西</h2>
 <ul>
   <li>设置、接口配置和 API Key：存在浏览器的扩展存储里（<code>chrome.storage.local</code>），不同步到其他设备。
     网页里运行的脚本读不到 Key。</li>
-  <li>译文缓存和用量统计：存在本机，重看时不用再花钱；可以在设置页一键清空，卸载扩展时一起删除。</li>
-  <li>诊断信息：只在你点「复制诊断信息」或「导出诊断」时生成，进你自己的剪贴板或下载文件夹；不含 API Key。</li>
+  <li>译文缓存和用量统计：存在本机，重看时命中缓存的部分不再请求接口；可以在设置页一键清空，卸载扩展时一起删除。</li>
+  <li>诊断信息：直播翻译时在内存里记着最近的几百条（耗时、用量、出错原因），关掉浏览器就没了；只有你点「复制诊断信息」或「导出诊断」
+    才写进你自己的剪贴板或下载文件夹。不含 API Key。</li>
+  <li>音频：不写进硬盘。录下的标签页声音用完就扔，关掉直播翻译就不再录；Twitch 钩子攒着的播放器声音（最多几分钟）只在那个
+    Twitch 页面的内存里，随着播放往前滚着丢旧的，关掉或离开那个页面就没了。</li>
+  <li>页面地址和视频编号：用来认出当前页面、管理直播会话、定位缓存；设成「总是翻译」的网站名单也存在这里。翻译请求不单独附带页面地址，但要翻的文字或标题里本身可能带着网址。</li>
   <li>导出设置：你点「导出设置」得到的文件里有 API Key（明文），请自己保管。</li>
 </ul>
+
+<h2>数据用途</h2>
+<p>Gloss 对用户数据的使用遵守 Chrome 网上应用店的用户数据政策，包括其中的 Limited Use（有限使用）要求：数据只用于上面写明的翻译、字幕和语音识别功能，不用于广告、用户画像、信用评估或借贷；不出售，开发者也不接收、不查看你的内容。</p>
 
 <h2>权限</h2>
 <p>每项权限的用途写在扩展的商店页上。网页翻译、录音（标签页声音）、Twitch、自定义接口地址都是用到时才向你申请，你可以随时在
@@ -73,49 +83,74 @@ Chrome 的扩展设置里收回。</p>
 
 <hr>
 
-<h1 lang="en">Translate Privacy Policy</h1>
-<p class="meta" lang="en">Applies to the Chrome extension Translate (bilingual translation for web pages, YouTube subtitles and live streams) · Effective October 19, 2026</p>
+<h1 lang="en">Gloss Privacy Policy</h1>
+<p class="meta" lang="en">Applies to the Chrome extension Gloss (bilingual translation for web pages, YouTube and Bilibili subtitles, and live streams) · Effective October 30, 2026</p>
 <div lang="en">
 <h2>In short</h2>
-<p>The extension has no server of its own, collects and sells nothing, and has no analytics or ads. The content you choose to translate is sent
-only to <strong>the endpoint you configure in its settings</strong> (for example OpenAI, Anthropic, or your own service) for translation or speech
-recognition. Everything else stays in this browser on your computer.</p>
+<p>The developer runs no server that receives your data: your API keys, page text, subtitles and audio never reach the developer, and there are
+no analytics or ads. To translate and recognize speech, the extension sends the content you choose to translate to <strong>the endpoint you
+configure in its settings</strong> (for example OpenAI, Anthropic, DeepSeek, or your own service); to read subtitles and video segments it
+contacts the video site and its video servers. Settings, caches and usage records stay in this browser on your computer.</p>
 
 <h2>What is sent, and to whom</h2>
-<p>Only when you turn on the corresponding translation, and only to the endpoint you configured (never to the developer):</p>
+<p>When you turn on the corresponding translation (including sites marked “always translate” and subtitle translation, which is on by default),
+or click “test connection” in settings (a fixed sample sentence / a short test tone), the following goes to the endpoint you configured (never
+to the developer):</p>
 <ul>
-  <li><strong>Web pages</strong>: the paragraphs being translated (by default only those on screen) and the page title as a topic hint — when you
-    turn translation on in the popup, press the shortcut, or have marked the site “always translate”.</li>
-  <li><strong>YouTube subtitles</strong>: the subtitle text, plus the video title and part of its description to keep names and terms consistent.</li>
+  <li><strong>Web pages</strong>: the text being translated (the whole page, navigation and buttons included; by default only what has come on
+    screen) and the page title as a topic hint — when you turn translation on in the popup, press the shortcut, or have marked the site
+    “always translate”.</li>
+  <li><strong>YouTube and Bilibili subtitles</strong>: the subtitle text, plus the video title and part of its description to keep names and terms consistent; if you have written preferred translations, also the ones that appear in that batch of subtitles.</li>
   <li><strong>Live streams and replays</strong>: the video's own captions when it has them. When it has none, or when you click “use speech
     recognition” in the popup, the tab's audio is captured and sent to the speech-recognition endpoint you configured, and the recognized text
-    to the translation endpoint; capturing tab audio needs a separate permission you grant in the popup.</li>
-  <li><strong>Filling caption gaps on replays</strong>: Twitch and Kick replays use the streamer's own embedded captions. When the streamer's
-    caption software stops for a while and someone is speaking, the extension takes that stretch of audio from the video data (not by recording
+    to the translation endpoint; capturing tab audio needs a separate permission you grant in the popup. Translation requests also include the page title, platform category, a small amount of recent source text and matching preferred translations to help interpret the context and keep terminology consistent.
+    Speech-recognition requests may also carry a little recent source text, the video title and name spellings as hints. OpenAI's realtime
+    speech recognition (an experiment, off by default) first requests a short-lived credential from OpenAI and uses it to connect to the same
+    service.</li>
+  <li><strong>Filling caption gaps on replays</strong>: Twitch and Kick replays use the streamer's own embedded captions. When the captions
+    leave a gap of several seconds and that stretch has sound, the extension takes that stretch of audio from the video data (not by recording
     the tab) and sends it to your speech-recognition endpoint to fill the gap — only if you have configured one.</li>
   <li><strong>Your API key</strong>: sent only as a request header to the endpoint you entered it for.</li>
 </ul>
 <p>You choose these endpoints; their own privacy policies govern what they do with what they receive.</p>
 
-<h2>Reading captions embedded in video</h2>
+<h2>Reading subtitles from video sites</h2>
+<p>These requests go to the video site itself and may carry your signed-in session on that site; the site's cookies are never sent to your
+translation or speech-recognition endpoint.</p>
 <ul>
   <li><strong>Twitch replays</strong>: after you grant <code>www.twitch.tv</code>, the extension reads, inside the Twitch page, the video data the
     player is already downloading, and extracts the captions the streamer embedded in it. Nothing extra is downloaded and no Twitch API is called;
     the data stays in the page and is used only while you have live translation on.</li>
   <li><strong>Kick replays</strong>: when you turn on live translation, the extension downloads a few short lowest-quality segments around the
-    playhead from Kick's video servers, without cookies, to read the captions in them (and, for caption gaps, that stretch of audio; see above).</li>
+    playhead from Kick's video servers, without cookies, to read the captions in them (and, for caption gaps, that stretch of audio; see above).
+    If the page does not reveal the playback address, it asks Kick's own video-info endpoint once, and that request carries your Kick session.</li>
   <li><strong>YouTube</strong>: subtitles come from YouTube's own caption endpoint, the same data the player shows.</li>
+  <li><strong>Bilibili</strong>: the subtitle list comes from Bilibili's own endpoint (the same one the player uses, with your Bilibili session),
+    and the subtitle files from Bilibili's subtitle servers.</li>
 </ul>
 
 <h2>What stays on your computer</h2>
 <ul>
   <li>Settings, endpoint profiles and API keys, in the extension's storage (<code>chrome.storage.local</code>), not synced. Scripts running in web
     pages cannot read your keys.</li>
-  <li>The translation cache and usage counters, local only; clear them in settings, and they are removed when you uninstall.</li>
-  <li>Diagnostics, created only when you click “copy diagnostics” or “export diagnostics”, go to your clipboard or downloads folder and never
-    contain your API key.</li>
+  <li>The translation cache and usage counters, local only (cached parts are not requested again); clear them in settings, and they are removed
+    when you uninstall.</li>
+  <li>Diagnostics: during live translation the last few hundred entries (timings, usage, error reasons) are kept in memory and are gone when the
+    browser closes; they are written to your clipboard or downloads folder only when you click “copy diagnostics” or “export diagnostics”, and
+    never contain your API key.</li>
+  <li>Audio is never written to disk. Captured tab audio is discarded once used, and capture stops when you turn live translation off. The
+    few minutes of player audio the Twitch hook keeps live only in that Twitch page's memory, roll forward with playback, and are gone when you
+    close or leave the page.</li>
+  <li>Page addresses and video IDs, used to recognize the current page, manage live sessions and find cached translations; the list of sites
+    marked “always translate” is kept here too. Translation requests do not attach the page address, though the text or title being translated
+    may itself contain a URL.</li>
   <li>Exported settings files contain your API keys in plain text; keep them safe.</li>
 </ul>
+
+<h2>How data is used</h2>
+<p>Gloss's use of user data complies with the Chrome Web Store User Data Policy, including the Limited Use requirements: data is used only for
+the translation, subtitle and speech-recognition features described above, never for advertising, profiling, credit or lending decisions. It
+is not sold, and the developer neither receives nor reads your content.</p>
 
 <h2>Changes and contact</h2>
 <p>Changes will be posted on this page with a new effective date. Questions:

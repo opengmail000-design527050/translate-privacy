@@ -1,6 +1,6 @@
-# Translate 隐私权政策 · Privacy Policy
+# Gloss 隐私权政策 · Privacy Policy
 
-Chrome 扩展 Translate（网页、YouTube 字幕和直播的双语翻译）的隐私权政策。
+Chrome 扩展 Gloss（网页、YouTube / B 站字幕和直播的双语翻译）的隐私权政策。
 
 页面：https://opengmail000-design527050.github.io/translate-privacy/
 
