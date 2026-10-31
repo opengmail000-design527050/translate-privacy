@@ -28,7 +28,7 @@
 
 <h2>一句话</h2>
 <p>扩展的开发者没有接收数据的服务器，收不到你的 API Key、网页内容、字幕或音频，也没有统计和广告。为了翻译和识别语音，扩展会把你要翻译的内容发给<strong>你自己在设置页填的接口</strong>
-（比如 OpenAI、Anthropic、DeepSeek，或者你自建的服务）；读字幕和视频片段时会访问对应的视频网站和它们的视频服务器。设置、缓存和用量记录都存在你这台电脑的浏览器里。</p>
+（比如 OpenAI、Anthropic、DeepSeek，或者你自建的服务）；读字幕时会访问对应的视频网站。设置、缓存和用量记录都存在你这台电脑的浏览器里。</p>
 
 <h2>会发出去的东西，发给谁</h2>
 <p>以下内容在你打开相应的翻译时（包括设成「总是翻译」的网站和默认自动开启的字幕翻译），或者在设置页点「测试连接」时（发一句固定的示例文字 / 一小段测试音），发给你配置的接口地址（扩展的开发者收不到）：</p>
@@ -49,10 +49,8 @@
 <h2>从视频网站读取字幕</h2>
 <p>下面这些请求发给视频网站自己，可能带着你在那个网站的登录状态；网站的 Cookie 不会发给翻译或语音识别接口。</p>
 <ul>
-  <li><strong>Twitch 回放</strong>：你授权 <code>www.twitch.tv</code> 之后，扩展在 Twitch 页面里读取播放器本来就在下载的视频数据，
-    从中取出主播嵌在视频里的字幕。不另外下载，不调用 Twitch 的接口；读到的数据只留在页面里，你打开直播翻译时才拿来翻译。</li>
-  <li><strong>Kick 回放</strong>：你打开直播翻译时，扩展从 Kick 的视频服务器下载播放位置附近最低清晰度的几小段视频，读里面的字幕
-    （字幕中断时也取其中那一段的声音补识别，见上），这些请求不带 Cookie。页面里找不到播放地址时，会向 Kick 网站自己的视频信息接口查一次，这次请求会带着你在 Kick 的登录状态。</li>
+  <li><strong>Twitch 和 Kick 回放</strong>：你分别授权 <code>www.twitch.tv</code>、<code>kick.com</code> 之后，扩展在对应页面里读取播放器本来就在下载的视频数据，
+    从中取出主播嵌在视频里的字幕（字幕中断时也取其中那一段的声音补识别，见上）。不另外下载，不调用这两个网站的接口；读到的数据只留在页面里，你打开直播翻译时才拿来翻译。</li>
   <li><strong>YouTube</strong>：字幕从 YouTube 自己的字幕接口读取，跟播放器显示字幕时取的是同一份。</li>
   <li><strong>B 站</strong>：字幕列表从 B 站自己的接口读取（跟播放器取的是同一份，带着你在 B 站的登录状态），字幕文件从 B 站的字幕服务器读取。</li>
 </ul>
@@ -64,8 +62,8 @@
   <li>译文缓存和用量统计：存在本机，重看时命中缓存的部分不再请求接口；可以在设置页一键清空，卸载扩展时一起删除。</li>
   <li>诊断信息：直播翻译时在内存里记着最近的几百条（耗时、用量、出错原因），关掉浏览器就没了；只有你点「复制诊断信息」或「导出诊断」
     才写进你自己的剪贴板或下载文件夹。不含 API Key。</li>
-  <li>音频：不写进硬盘。录下的标签页声音用完就扔，关掉直播翻译就不再录；Twitch 钩子攒着的播放器声音（最多几分钟）只在那个
-    Twitch 页面的内存里，随着播放往前滚着丢旧的，关掉或离开那个页面就没了。</li>
+  <li>音频：不写进硬盘。录下的标签页声音用完就扔，关掉直播翻译就不再录；Twitch / Kick 的钩子攒着的播放器声音（最多几分钟）只在那个
+    页面的内存里，随着播放往前滚着丢旧的，关掉或离开那个页面就没了。</li>
   <li>页面地址和视频编号：用来认出当前页面、管理直播会话、定位缓存；设成「总是翻译」的网站名单也存在这里。翻译请求不单独附带页面地址，但要翻的文字或标题里本身可能带着网址。</li>
   <li>导出设置：你点「导出设置」得到的文件里有 API Key（明文），请自己保管。</li>
 </ul>
@@ -74,7 +72,7 @@
 <p>Gloss 对用户数据的使用遵守 Chrome 网上应用店的用户数据政策，包括其中的 Limited Use（有限使用）要求：数据只用于上面写明的翻译、字幕和语音识别功能，不用于广告、用户画像、信用评估或借贷；不出售，开发者也不接收、不查看你的内容。</p>
 
 <h2>权限</h2>
-<p>每项权限的用途写在扩展的商店页上。网页翻译、录音（标签页声音）、Twitch、自定义接口地址都是用到时才向你申请，你可以随时在
+<p>每项权限的用途写在扩展的商店页上。网页翻译、录音（标签页声音）、Twitch 和 Kick、你填的翻译和识别接口地址（不管是哪家）都是用到时才向你申请，你可以随时在
 Chrome 的扩展设置里收回。</p>
 
 <h2>变更与联系</h2>
@@ -89,8 +87,8 @@ Chrome 的扩展设置里收回。</p>
 <h2>In short</h2>
 <p>The developer runs no server that receives your data: your API keys, page text, subtitles and audio never reach the developer, and there are
 no analytics or ads. To translate and recognize speech, the extension sends the content you choose to translate to <strong>the endpoint you
-configure in its settings</strong> (for example OpenAI, Anthropic, DeepSeek, or your own service); to read subtitles and video segments it
-contacts the video site and its video servers. Settings, caches and usage records stay in this browser on your computer.</p>
+configure in its settings</strong> (for example OpenAI, Anthropic, DeepSeek, or your own service); to read subtitles it
+contacts the video site. Settings, caches and usage records stay in this browser on your computer.</p>
 
 <h2>What is sent, and to whom</h2>
 <p>When you turn on the corresponding translation (including sites marked “always translate” and subtitle translation, which is on by default),
@@ -118,12 +116,9 @@ to the developer):</p>
 <p>These requests go to the video site itself and may carry your signed-in session on that site; the site's cookies are never sent to your
 translation or speech-recognition endpoint.</p>
 <ul>
-  <li><strong>Twitch replays</strong>: after you grant <code>www.twitch.tv</code>, the extension reads, inside the Twitch page, the video data the
-    player is already downloading, and extracts the captions the streamer embedded in it. Nothing extra is downloaded and no Twitch API is called;
-    the data stays in the page and is used only while you have live translation on.</li>
-  <li><strong>Kick replays</strong>: when you turn on live translation, the extension downloads a few short lowest-quality segments around the
-    playhead from Kick's video servers, without cookies, to read the captions in them (and, for caption gaps, that stretch of audio; see above).
-    If the page does not reveal the playback address, it asks Kick's own video-info endpoint once, and that request carries your Kick session.</li>
+  <li><strong>Twitch and Kick replays</strong>: after you grant <code>www.twitch.tv</code> and <code>kick.com</code> (each separately), the extension reads, inside the page, the video data the
+    player is already downloading, and extracts the captions the streamer embedded in it (and, for caption gaps, that stretch of audio; see above).
+    Nothing extra is downloaded and neither site's API is called; the data stays in the page and is used only while you have live translation on.</li>
   <li><strong>YouTube</strong>: subtitles come from YouTube's own caption endpoint, the same data the player shows.</li>
   <li><strong>Bilibili</strong>: the subtitle list comes from Bilibili's own endpoint (the same one the player uses, with your Bilibili session),
     and the subtitle files from Bilibili's subtitle servers.</li>
@@ -139,7 +134,7 @@ translation or speech-recognition endpoint.</p>
     browser closes; they are written to your clipboard or downloads folder only when you click “copy diagnostics” or “export diagnostics”, and
     never contain your API key.</li>
   <li>Audio is never written to disk. Captured tab audio is discarded once used, and capture stops when you turn live translation off. The
-    few minutes of player audio the Twitch hook keeps live only in that Twitch page's memory, roll forward with playback, and are gone when you
+    few minutes of player audio the Twitch / Kick hook keeps live only in that page's memory, roll forward with playback, and are gone when you
     close or leave the page.</li>
   <li>Page addresses and video IDs, used to recognize the current page, manage live sessions and find cached translations; the list of sites
     marked “always translate” is kept here too. Translation requests do not attach the page address, though the text or title being translated
